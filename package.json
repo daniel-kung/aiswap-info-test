@@ -81,7 +81,6 @@
     "check:format": "yarn format --check",
     "check:all": "yarn check:lint && yarn check:format"
   },
-  "proxy": "http://13.229.91.62:8000",
   "eslintConfig": {
     "extends": "react-app"
   },

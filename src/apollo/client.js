@@ -5,7 +5,7 @@ import { HttpLink } from 'apollo-link-http'
 export const client = new ApolloClient({
   link: new HttpLink({
     // uri: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange',
-    uri: 'http://13.229.91.62:8000/subgraphs/name/davekaj/uniswap/graphql',
+    uri: 'https://api1.ccian.cc/subgraphs/name/davekaj/uniswap',
   }),
   cache: new InMemoryCache(),
   shouldBatch: true,
@@ -22,8 +22,8 @@ export const healthClient = new ApolloClient({
 
 export const blockClient = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/pancakeswap/blocks',
-    // uri: 'http://13.229.91.62:8000/subgraphs/name/davekaj/uniswap/graphql',
+    // uri: 'https://api.thegraph.com/subgraphs/name/pancakeswap/blocks',
+    uri: 'https://api1.ccian.cc/subgraphs/name/davekaj/blocks',
   }),
   cache: new InMemoryCache(),
 })
