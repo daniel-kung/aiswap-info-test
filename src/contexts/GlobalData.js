@@ -326,7 +326,7 @@ const getChartData = async (oldestDateToFetch) => {
       }
     }
 
-    if (data) {
+    if (data && data.length > 0) {
       let dayIndexSet = new Set()
       let dayIndexArray = []
       const oneDay = 24 * 60 * 60
@@ -545,10 +545,10 @@ export function useGlobalData() {
     }
   }, [ethPrice, oldEthPrice, update, data, updateAllPairsInUniswap, updateAllTokensInUniswap])
 
-  return data || {}
+  return data || {a: 0}
 }
 
-export function useGlobalChartData() {
+export function useGlobalChartData () {
   const [state, { updateChart }] = useGlobalDataContext()
   const [oldestDateFetch, setOldestDateFetched] = useState()
   const [activeWindow] = useTimeframe()

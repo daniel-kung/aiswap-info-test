@@ -101,6 +101,8 @@ function App() {
   const globalChartData = useGlobalChartData()
   const [latestBlock, headBlock] = useLatestBlocks()
 
+  console.log('globalData', globalData)
+  console.log('--globalChartData--', globalChartData)
   // show warning
   const showWarning = headBlock && latestBlock ? headBlock - latestBlock > BLOCK_DIFFERENCE_THRESHOLD : false
 
@@ -202,9 +204,11 @@ function App() {
               <Redirect to="/home" />
             </Switch>
           </BrowserRouter>
-        ) : (
-          <LocalLoader fill="true" />
-        )}
+        ) : (<>
+            <div>{JSON.stringify(globalChartData)}</div>
+          <div>000</div>
+            <LocalLoader fill="true" />
+        </>)}
       </AppWrapper>
     </ApolloProvider>
   )
