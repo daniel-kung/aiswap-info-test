@@ -193,6 +193,7 @@ export const Search = ({ small = false }) => {
             },
           })
 
+
           let pairs = await client.query({
             query: PAIR_SEARCH,
             variables: {
@@ -200,6 +201,9 @@ export const Search = ({ small = false }) => {
               id: value,
             },
           })
+
+          // console.log('--tokens---', tokens)
+          // console.log('--pairs---', pairs)
 
           setSearchedPairs(
             updateNameData(pairs.data.as0)
@@ -234,6 +238,9 @@ export const Search = ({ small = false }) => {
       return !included
     })
   )
+
+  // console.log('--allTokens--', allTokens)
+  
 
   let uniqueTokens = []
   let found = {}
@@ -437,10 +444,10 @@ export const Search = ({ small = false }) => {
               : below410
               ? 'Search...'
               : below470
-              ? 'Search PancakeSwap...'
+              ? 'Search KeyneSwap...'
               : below700
               ? 'Search pairs and tokens...'
-              : 'Search PancakeSwap pairs and tokens...'
+              : 'Search KeyneSwap pairs and tokens...'
           }
           value={value}
           onChange={(e) => {

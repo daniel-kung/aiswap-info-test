@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'feather-icons'
 
 import TopTokenList from '../components/TokenList'
@@ -9,11 +9,19 @@ import { PageWrapper, FullWrapper } from '../components'
 import { RowBetween } from '../components/Row'
 import Search from '../components/Search'
 import { useMedia } from 'react-use'
+import { getAllTokensOnUniswap } from '../contexts/GlobalData'
 
 function AllTokensPage() {
   const allTokens = useAllTokenData()
+  // const [allTokens, setAllTokens] = useState([])
 
   useEffect(() => {
+    // // console.log('----all tokens page', allTokens)
+    // ;(async () => {
+    //   let allTokens = await getAllTokensOnUniswap()
+    //   // console.log('---allTokens----', allTokens)
+    //   setAllTokens(allTokens)
+    // })()
     window.scrollTo(0, 0)
   }, [])
 

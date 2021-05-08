@@ -23,6 +23,7 @@ import {
   isAddress,
   getBlocksFromTimestamps,
   splitQuery,
+  isNotVoid,
 } from '../utils'
 import { timeframeOptions } from '../constants'
 import { useLatestBlocks } from './Application'
@@ -616,12 +617,15 @@ export function Updater() {
   const [, { updateTopTokens }] = useTokenDataContext()
   const [ethPrice, ethPriceOld] = useEthPrice()
   useEffect(() => {
-    async function getData() {
+    // console.log('--- token -Updater---')
+    async function getData () {
       // get top pairs for overview list
       let topTokens = await getTopTokens(ethPrice, ethPriceOld)
+      // console.log('---topTokens---', topTokens)
       topTokens && updateTopTokens(topTokens)
     }
-    ethPrice && ethPriceOld && getData()
+    // console.log('--ethPrice, ethPriceOld--', ethPrice, ethPriceOld)
+    isNotVoid(ethPrice) && isNotVoid(ethPriceOld) && getData()
   }, [ethPrice, ethPriceOld, updateTopTokens])
   return null
 }

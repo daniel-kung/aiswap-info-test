@@ -9,6 +9,7 @@ import {
   getBlocksFromTimestamps,
   get2DayPercentChange,
   getTimeframe,
+  isNotVoid,
 } from '../utils'
 import { GLOBAL_DATA, GLOBAL_TXNS, GLOBAL_CHART, ETH_PRICE, ALL_PAIRS, ALL_TOKENS } from '../apollo/queries'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -146,6 +147,7 @@ export default function Provider({ children }) {
   }, [])
 
   const updateAllTokensInUniswap = useCallback((allTokens) => {
+    // console.log('---updateAllTokensInUniswap---', allTokens)
     dispatch({
       type: UPDATE_ALL_TOKENS_IN_UNISWAP,
       payload: {
@@ -162,6 +164,7 @@ export default function Provider({ children }) {
       },
     })
   }, [])
+  // console.log('---state---', state)
   return (
     <GlobalDataContext.Provider
       value={useMemo(
@@ -434,7 +437,7 @@ const getEthPrice = async () => {
   let ethPrice = 0
   let ethPriceOneDay = 0
   let priceChangeETH = 0
-
+  
   try {
     let oneDayBlock = await getBlockFromTimestamp(utcOneDayBack)
     let result = await client.query({
@@ -445,11 +448,12 @@ const getEthPrice = async () => {
       query: ETH_PRICE(oneDayBlock),
       fetchPolicy: 'cache-first',
     })
+    // debugger
     const currentPrice = result?.data?.bundles[0]?.ethPrice
     const oneDayBackPrice = resultOneDay?.data?.bundles[0]?.ethPrice
     priceChangeETH = getPercentChange(currentPrice, oneDayBackPrice)
-    ethPrice = currentPrice
-    ethPriceOneDay = oneDayBackPrice
+    ethPrice = currentPrice ?? 0
+    ethPriceOneDay = oneDayBackPrice ?? 0
   } catch (e) {
     console.log(e)
   }
@@ -495,7 +499,7 @@ async function getAllPairsOnUniswap() {
 /**
  * Loop through every token on uniswap, used for search
  */
-async function getAllTokensOnUniswap() {
+export async function getAllTokensOnUniswap() {
   try {
     let allFound = false
     let skipCount = 0
@@ -529,18 +533,21 @@ export function useGlobalData() {
 
   const data = state?.globalData
 
+  // console.log('---ethPrice, oldEthPrice---', ethPrice, oldEthPrice)
   useEffect(() => {
     async function fetchData() {
       let globalData = await getGlobalData(ethPrice, oldEthPrice)
       globalData && update(globalData)
 
       let allPairs = await getAllPairsOnUniswap()
+      console.log('---allPairs----', allPairs)
       updateAllPairsInUniswap(allPairs)
 
       let allTokens = await getAllTokensOnUniswap()
+      // console.log('---allTokens----', allTokens)
       updateAllTokensInUniswap(allTokens)
     }
-    if (!data && ethPrice && oldEthPrice) {
+    if (!data  && isNotVoid(ethPrice) && isNotVoid(oldEthPrice) ) {
       fetchData()
     }
   }, [ethPrice, oldEthPrice, update, data, updateAllPairsInUniswap, updateAllTokensInUniswap])
@@ -628,6 +635,7 @@ export function useAllPairsInUniswap() {
 
 export function useAllTokensInUniswap() {
   const [state] = useGlobalDataContext()
+  // console.trace('---state---', state)
   let allTokens = state?.allTokens
 
   return allTokens || []

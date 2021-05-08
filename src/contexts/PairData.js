@@ -23,6 +23,7 @@ import {
   getBlocksFromTimestamps,
   getTimestampsForChanges,
   splitQuery,
+  isNotVoid,
 } from '../utils'
 import { timeframeOptions } from '../constants'
 import { useLatestBlocks } from './Application'
@@ -479,7 +480,7 @@ export function Updater() {
       let topPairs = await getBulkPairData(formattedPairs, ethPrice)
       topPairs && updateTopPairs(topPairs)
     }
-    ethPrice && getData()
+    isNotVoid(ethPrice) && getData()
   }, [ethPrice, updateTopPairs])
   return null
 }
