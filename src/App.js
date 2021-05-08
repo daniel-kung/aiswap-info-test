@@ -109,13 +109,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AppWrapper>
-        {showWarning && (
+        {/* {showWarning && (
           <WarningWrapper>
             <WarningBanner>
               {`The data on this site has only synced to Binance Smart Chain block ${latestBlock} (out of ${headBlock}). Please check back soon.`}
             </WarningBanner>
           </WarningWrapper>
-        )}
+        )} */}
         {globalData &&
         Object.keys(globalData).length > 0 &&
         globalChartData &&

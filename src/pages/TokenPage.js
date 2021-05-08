@@ -188,7 +188,7 @@ function TokenPage({ address, history }) {
               style={{ width: 'fit-content' }}
               color={backgroundColor}
               external
-              href={'https://bscscan.com/address/' + address}
+              href={'https://www.oklink.com/okexchain-test/address/' + address}
             >
               <Text style={{ marginLeft: '.15rem' }} fontSize={'14px'} fontWeight={400}>
                 ({address.slice(0, 8) + '...' + address.slice(36, 42)})
@@ -384,8 +384,11 @@ function TokenPage({ address, history }) {
                     </AutoRow>
                   </Column>
                   <ButtonLight color={backgroundColor}>
-                    <Link color={backgroundColor} external href={'https://bscscan.com/address/' + address}>
+                    {/* <Link color={backgroundColor} external href={'https://b_scscan.com/address/' + address}>
                       View on BscScan ↗
+                    </Link> */}
+                    <Link color={backgroundColor} external href={'https://www.oklink.com/okexchain-test/address/' + address}>
+                      View on OkexChain ↗
                     </Link>
                   </ButtonLight>
                 </TokenDetailsLayout>

@@ -131,6 +131,7 @@ export const ETH_PRICE = (block) => {
       }
     }
   `
+  console.log('---queryString---', queryString)
   return gql(queryString)
 }
 
@@ -317,6 +318,8 @@ export const GLOBAL_DATA = (block) => {
         pairCount
       }
     }`
+  
+  console.log('---GLOBAL_DATA queryString---', queryString)
   return gql(queryString)
 }
 

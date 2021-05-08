@@ -277,6 +277,8 @@ async function getGlobalData(ethPrice, oldEthPrice) {
         twoDayData.txCount ? twoDayData.txCount : 0
       )
 
+
+      console.log('-----data.totalLiquidityETH * ethPrice----', data.totalLiquidityETH ,  ethPrice)
       // format the total liquidity in USD
       data.totalLiquidityUSD = data.totalLiquidityETH * ethPrice
       const liquidityChangeUSD = getPercentChange(
@@ -354,7 +356,7 @@ const getChartData = async (oldestDateToFetch) => {
           data.push({
             date: nextDay,
             dailyVolumeUSD: 0,
-            totalLiquidityUSD: latestLiquidityUSD,
+            totalLiquidityUSD: latestLiquidityUSD ?? 0,
             mostLiquidTokens: latestDayDats,
           })
         } else {
@@ -451,6 +453,8 @@ const getEthPrice = async () => {
     // debugger
     const currentPrice = result?.data?.bundles[0]?.ethPrice
     const oneDayBackPrice = resultOneDay?.data?.bundles[0]?.ethPrice
+    console.log('---currentPrice, oneDayBackPrice---')
+    console.log(currentPrice, oneDayBackPrice)
     priceChangeETH = getPercentChange(currentPrice, oneDayBackPrice)
     ethPrice = currentPrice ?? 0
     ethPriceOneDay = oneDayBackPrice ?? 0

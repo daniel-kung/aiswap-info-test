@@ -294,10 +294,10 @@ export const setThemeColor = (theme) => document.documentElement.style.setProper
 export const Big = (number) => new BigNumber(number)
 
 export const urls = {
-  showTransaction: (tx) => `https://bscscan.com/tx/${tx}/`,
-  showAddress: (address) => `https://bscscan.com/address/${address}/`,
-  showToken: (address) => `https://bscscan.com/token/${address}/`,
-  showBlock: (block) => `https://bscscan.com/block/${block}/`,
+  showTransaction: (tx) => `https://www.oklink.com/okexchain-test/tx/${tx}/`,
+  showAddress: (address) => `https://www.oklink.com/okexchain-test/address/${address}/`,
+  showToken: (address) => `https://www.oklink.com/okexchain-test/token/${address}/`,
+  showBlock: (block) => `https://www.oklink.com/okexchain-test/block/${block}/`,
 }
 
 export const formatTime = (unix) => {
