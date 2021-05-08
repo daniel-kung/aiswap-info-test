@@ -469,10 +469,12 @@ export const PAIR_SEARCH = gql`
   }
 `
 
+// where: { createdAtBlockNumber_gte: 5619965 }
+
 export const ALL_PAIRS = (block) => {
   return gql(`
   query pairs($skip: Int!) {
-    pairs(first: 100, skip: $skip, orderBy: trackedReserveETH, orderDirection: desc, where: { createdAtBlockNumber_gte: 5619965 }) {
+    pairs(first: 100, skip: $skip, orderBy: trackedReserveETH, orderDirection: desc) {
       id
       token0 {
         id
@@ -521,9 +523,10 @@ const PairFields = `
   }
 `
 
+// where: { createdAtBlockNumber_gte : 5619965 }
 export const PAIRS_CURRENT = gql`
   query pairs {
-    pairs(first: 100, where: { createdAtBlockNumber_gte : 5619965 },  orderBy: trackedReserveETH, orderDirection: desc) {
+    pairs(first: 100,  orderBy: trackedReserveETH, orderDirection: desc) {
       id
     }
   }

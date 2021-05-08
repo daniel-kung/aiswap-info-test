@@ -540,7 +540,7 @@ export function useGlobalData() {
       globalData && update(globalData)
 
       let allPairs = await getAllPairsOnUniswap()
-      console.log('---allPairs----', allPairs)
+      // console.log('---allPairs----', allPairs)
       updateAllPairsInUniswap(allPairs)
 
       let allTokens = await getAllTokensOnUniswap()
