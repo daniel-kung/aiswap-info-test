@@ -385,7 +385,7 @@ function TokenPage({ address, history }) {
                   </Column>
                   <ButtonLight color={backgroundColor}>
                     {/* <Link color={backgroundColor} external href={'https://b_scscan.com/address/' + address}>
-                      View on BscScan ↗
+                      View on okLink ↗
                     </Link> */}
                     <Link color={backgroundColor} external href={'https://www.oklink.com/okexchain-test/address/' + address}>
                       View on OkexChain ↗

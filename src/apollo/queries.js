@@ -131,7 +131,7 @@ export const ETH_PRICE = (block) => {
       }
     }
   `
-  console.log('---queryString---', queryString)
+  // console.log('---queryString---', queryString)
   return gql(queryString)
 }
 
@@ -303,6 +303,9 @@ export const GLOBAL_CHART = gql`
   }
 `
 
+
+      //  (${block ? `block: { number: ${block}}` : ``} 
+      //  where: { id: "${FACTORY_ADDRESS.toLowerCase()}" })
 export const GLOBAL_DATA = (block) => {
   const queryString = ` query uniswapFactories {
       uniswapFactories(

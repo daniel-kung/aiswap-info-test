@@ -212,7 +212,7 @@ async function getGlobalData(ethPrice, oldEthPrice) {
 
   try {
     // get timestamps for the days
-    const utcCurrentTime = dayjs.unix(1615636800)
+    const utcCurrentTime = dayjs.unix(parseInt(Date.now() / 1000))
     const utcOneDayBack = utcCurrentTime.subtract(1, 'day').unix()
     const utcTwoDaysBack = utcCurrentTime.subtract(2, 'day').unix()
     const utcOneWeekBack = utcCurrentTime.subtract(1, 'week').unix()
@@ -259,6 +259,7 @@ async function getGlobalData(ethPrice, oldEthPrice) {
     const twoWeekData = twoWeekResult.data.uniswapFactories[0]
 
     if (data && oneDayData && twoDayData && twoWeekData) {
+      console.log('---oneDayData', data)
       let [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
         data.totalVolumeUSD,
         oneDayData.totalVolumeUSD ? oneDayData.totalVolumeUSD : 0,
@@ -278,7 +279,7 @@ async function getGlobalData(ethPrice, oldEthPrice) {
       )
 
 
-      console.log('-----data.totalLiquidityETH * ethPrice----', data.totalLiquidityETH ,  ethPrice)
+      // console.log('-----data.totalLiquidityETH * ethPrice----', data.totalLiquidityETH ,  ethPrice)
       // format the total liquidity in USD
       data.totalLiquidityUSD = data.totalLiquidityETH * ethPrice
       const liquidityChangeUSD = getPercentChange(
@@ -433,7 +434,7 @@ const getGlobalTransactions = async () => {
  * Gets the current price  of ETH, 24 hour price, and % change between them
  */
 const getEthPrice = async () => {
-  const utcCurrentTime = dayjs.unix(1615636800)
+  const utcCurrentTime = dayjs.unix(parseInt(Date.now() / 1000))
   const utcOneDayBack = utcCurrentTime.subtract(1, 'day').startOf('minute').unix()
 
   let ethPrice = 0
@@ -453,7 +454,7 @@ const getEthPrice = async () => {
     // debugger
     const currentPrice = result?.data?.bundles[0]?.ethPrice
     const oneDayBackPrice = resultOneDay?.data?.bundles[0]?.ethPrice
-    console.log('---currentPrice, oneDayBackPrice---')
+    // console.log('---currentPrice, oneDayBackPrice---')
     console.log(currentPrice, oneDayBackPrice)
     priceChangeETH = getPercentChange(currentPrice, oneDayBackPrice)
     ethPrice = currentPrice ?? 0
@@ -472,7 +473,7 @@ const TOKENS_TO_FETCH = 100
  * Loop through every pair on uniswap, used for search
  */
 async function getAllPairsOnUniswap() {
-  const utcCurrentTime = dayjs.unix(1614556800)
+  const utcCurrentTime = dayjs.unix(parseInt(Date.now() / 1000))
   const utcOneHourBack = utcCurrentTime.subtract(3, 'day').startOf('minute').unix()
   let oneHourBlock = await getBlockFromTimestamp(utcOneHourBack)
 
@@ -536,6 +537,7 @@ export function useGlobalData() {
   const [ethPrice, oldEthPrice] = useEthPrice()
 
   const data = state?.globalData
+  // const [data, setData] = useState(state?.globalData)
 
   // console.log('---ethPrice, oldEthPrice---', ethPrice, oldEthPrice)
   useEffect(() => {
@@ -550,6 +552,9 @@ export function useGlobalData() {
       let allTokens = await getAllTokensOnUniswap()
       // console.log('---allTokens----', allTokens)
       updateAllTokensInUniswap(allTokens)
+      
+      // console.log('-----globalData---', globalData)
+      // setData(JSON.parse(JSON.stringify(globalData)))
     }
     if (!data  && isNotVoid(ethPrice) && isNotVoid(oldEthPrice) ) {
       fetchData()

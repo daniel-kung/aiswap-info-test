@@ -478,7 +478,7 @@ function PairPage({ pairAddress, history }) {
                   </Column>
                   <ButtonLight color={backgroundColor}>
                     <Link color={backgroundColor} external href={'https://www.oklink.com/okexchain-test/address/' + pairAddress}>
-                      View on BscScan ↗
+                      View on okLink ↗
                     </Link>
                   </ButtonLight>
                 </TokenDetailsLayout>

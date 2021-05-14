@@ -7,7 +7,7 @@ import DropdownSelect from '../DropdownSelect'
 import TradingViewChart, { CHART_TYPES } from '../TradingviewChart'
 import { RowFixed } from '../Row'
 import { OptionButton } from '../ButtonStyled'
-import { getTimeframe } from '../../utils'
+import { getTimeframe, isNotVoid } from '../../utils'
 import { TYPE } from '../../Theme'
 
 const CHART_VIEW = {
@@ -37,6 +37,9 @@ const GlobalChart = ({ display }) => {
     oneWeekVolume,
     weeklyVolumeChange,
   } = useGlobalData()
+
+
+  console.log('---pc----oneWeekVolume---', oneWeekVolume)
 
   // based on window, get starttim
   let utcStartTime = getTimeframe(timeWindow)
@@ -82,7 +85,7 @@ const GlobalChart = ({ display }) => {
         <DropdownSelect options={CHART_VIEW} active={chartView} setActive={setChartView} color={'#4FD8DE'} />
       )}
 
-      {chartDataFiltered && chartView === CHART_VIEW.LIQUIDITY && (
+      {chartDataFiltered && isNotVoid(totalLiquidityUSD) && chartView === CHART_VIEW.LIQUIDITY && (
         <ResponsiveContainer aspect={60 / 28} ref={ref}>
           <TradingViewChart
             data={dailyData}
