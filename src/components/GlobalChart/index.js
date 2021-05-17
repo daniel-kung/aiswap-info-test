@@ -98,7 +98,7 @@ const GlobalChart = ({ display }) => {
           />
         </ResponsiveContainer>
       )}
-      {chartDataFiltered && chartView === CHART_VIEW.VOLUME && (
+      {chartDataFiltered  && isNotVoid(volumeWindow === VOLUME_WINDOW.WEEKLY ? oneWeekVolume : oneDayVolumeUSD) && chartView === CHART_VIEW.VOLUME && (
         <ResponsiveContainer aspect={60 / 28}>
           <TradingViewChart
             data={chartDataFiltered}
