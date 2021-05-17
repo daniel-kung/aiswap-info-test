@@ -38,20 +38,17 @@ export default function Warning({ type, show, setShow, address }) {
   const textContent = below800 ? (
     <div>
       <Text fontWeight={500} lineHeight={'145.23%'} mt={'10px'}>
-        Anyone can create and name any BEP20 token on BSC, including creating fake versions of existing tokens and
-        tokens that claim to represent projects that do not have a token.
+        Anyone can create and name any KIP20 token on OKExchain, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token.
       </Text>
       <Text fontWeight={500} lineHeight={'145.23%'} mt={'10px'}>
-        Similar to okLink, this site automatically tracks analytics for all BEP20 tokens independent of token
-        integrity. Please do your own research before interacting with any BEP20 token.
+        Similar to okLink, this site automatically tracks analytics for all KIP20 tokens independent of token integrity. Please do your own research before interacting with any KIP20 token.
       </Text>
     </div>
   ) : (
     <Text fontWeight={500} lineHeight={'145.23%'} mt={'10px'}>
-      Anyone can create and name any BEP20 token on BSC, including creating fake versions of existing tokens and tokens
-      that claim to represent projects that do not have a token. Similar to okLink, this site automatically tracks
-      analytics for all BEP20 tokens independent of token integrity. Please do your own research before interacting with
-      any BEP20 token.
+      Anyone can create and name any KIP20 token on OKExchain, including creating fake versions of existing tokens and tokens that claim to represent projects that do not have a token. 
+      Similar to okLink, this site automatically tracks analytics for all KIP20 tokens independent of token integrity. 
+      Please do your own research before interacting with any KIP20 token.
     </Text>
   )
 
