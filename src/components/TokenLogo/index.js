@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { isAddress } from '../../utils/index.js'
 import PlaceHolder from '../../assets/placeholder.png'
 import EthereumLogo from '../../assets/eth.png'
+import Tokens from '../../constants/tokens.json'
 
 const BAD_IMAGES = {}
 
@@ -31,17 +32,24 @@ const StyledEthereumLogo = styled.div`
   }
 `
 
-export default function TokenLogo({ address, header = false, size = '24px', ...rest }) {
+export default function TokenLogo({ address, symbol, header = false, size = '24px', ...rest }) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
     setError(false)
   }, [address])
 
+  let coinPath = '';
+  if(Tokens[symbol]) {
+    coinPath = Tokens[symbol].logoURI;
+  } else {
+    coinPath = PlaceHolder;
+  }
+  
   if (error || BAD_IMAGES[address]) {
     return (
       <Inline>
-        <Image {...rest} alt={''} src={PlaceHolder} size={size} />
+        <Image {...rest} alt={''} src={coinPath} size={size} />
       </Inline>
     )
   }
@@ -70,9 +78,14 @@ export default function TokenLogo({ address, header = false, size = '24px', ...r
     )
   }
 
-  const path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/${isAddress(
-    address
-  )}/logo.png`
+  let path = ''
+  if (Tokens[symbol]) {
+    path = Tokens[symbol].logoURI
+  } else {
+    path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/${isAddress(
+      address
+    )}/logo.png`
+  }
 
   return (
     <Inline>

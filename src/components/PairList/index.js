@@ -160,6 +160,8 @@ function PairList({ pairs, color, disbaleLinks, maxItems = 10 }) {
               size={below600 ? 16 : 20}
               a0={pairData.token0.id}
               a1={pairData.token1.id}
+              symbol0={pairData.token0.symbol}
+              symbol1={pairData.token1.symbol}
               margin={!below740}
             />
             <CustomLink style={{ marginLeft: '20px', whiteSpace: 'nowrap' }} to={'/pair/' + pairAddress} color={color}>

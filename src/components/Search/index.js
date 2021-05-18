@@ -461,7 +461,7 @@ export const Search = ({ small = false }) => {
               return (
                 <BasicLink to={'/pair/' + pair.id} key={pair.id} onClick={onDismiss}>
                   <MenuItem>
-                    <DoubleTokenLogo a0={pair?.token0?.id} a1={pair?.token1?.id} margin={true} />
+                    <DoubleTokenLogo a0={pair?.token0?.id} a1={pair?.token1?.id} symbol0={pair?.token0?.symbol} symbol1={pair?.token1?.symbol} margin={true} />
                     <TYPE.body style={{ marginLeft: '10px' }}>
                       {pair.token0.symbol + '-' + pair.token1.symbol} Pair
                     </TYPE.body>
@@ -497,7 +497,7 @@ export const Search = ({ small = false }) => {
               <BasicLink to={'/token/' + token.id} key={token.id} onClick={onDismiss}>
                 <MenuItem>
                   <RowFixed>
-                    <TokenLogo address={token.id} style={{ marginRight: '10px' }} />
+                    <TokenLogo address={token.id} symbol={token.symbol} style={{ marginRight: '10px' }} />
                     <FormattedName text={token.name} maxCharacters={20} style={{ marginRight: '6px' }} />
                     (<FormattedName text={token.symbol} maxCharacters={6} />)
                   </RowFixed>
