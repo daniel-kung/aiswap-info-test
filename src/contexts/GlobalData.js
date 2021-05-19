@@ -258,34 +258,37 @@ async function getGlobalData(ethPrice, oldEthPrice) {
     })
     const twoWeekData = twoWeekResult.data.uniswapFactories[0]
 
-    if (data && oneDayData && twoDayData && twoWeekData) {
-      console.log('---oneDayData', data)
+    // if (data && oneDayData && twoDayData && twoWeekData) {
+    if (data) {
       let [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
         data.totalVolumeUSD,
-        oneDayData.totalVolumeUSD ? oneDayData.totalVolumeUSD : 0,
-        twoDayData.totalVolumeUSD ? twoDayData.totalVolumeUSD : 0
+        oneDayData?.totalVolumeUSD ? oneDayData.totalVolumeUSD : 0,
+        twoDayData?.totalVolumeUSD ? twoDayData.totalVolumeUSD : 0
       )
 
       const [oneWeekVolume, weeklyVolumeChange] = get2DayPercentChange(
         data.totalVolumeUSD,
-        oneWeekData.totalVolumeUSD,
-        twoWeekData.totalVolumeUSD
+        oneWeekData?.totalVolumeUSD ? oneWeekData?.totalVolumeUSD : 0,
+        twoWeekData?.totalVolumeUSD ? twoWeekData.totalVolumeUSD : 0
       )
 
       const [oneDayTxns, txnChange] = get2DayPercentChange(
         data.txCount,
-        oneDayData.txCount ? oneDayData.txCount : 0,
-        twoDayData.txCount ? twoDayData.txCount : 0
+        oneDayData?.txCount ? oneDayData.txCount : 0,
+        twoDayData?.txCount ? twoDayData.txCount : 0
       )
 
 
       // console.log('-----data.totalLiquidityETH * ethPrice----', data.totalLiquidityETH ,  ethPrice)
       // format the total liquidity in USD
       data.totalLiquidityUSD = data.totalLiquidityETH * ethPrice
-      const liquidityChangeUSD = getPercentChange(
-        data.totalLiquidityETH * ethPrice,
-        oneDayData.totalLiquidityETH * oldEthPrice
-      )
+      let liquidityChangeUSD
+      if(oneDayData) {
+        liquidityChangeUSD= getPercentChange(
+          data.totalLiquidityETH * ethPrice,
+          oneDayData.totalLiquidityETH * oldEthPrice
+        )
+      }
 
       // add relevant fields with the calculated amounts
       data.oneDayVolumeUSD = oneDayVolumeUSD
