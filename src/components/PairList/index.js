@@ -170,6 +170,7 @@ function PairList({ pairs, color, disbaleLinks, maxItems = 10 }) {
                 maxCharacters={below600 ? 8 : 16}
                 adjustSize={true}
                 link={true}
+                style={{color: color}}
               />
             </CustomLink>
           </DataText>
